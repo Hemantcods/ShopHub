@@ -17,7 +17,7 @@ const Hero = () => {
             <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
               Shop Smarter,
               <br />
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-500 to-sky-500 bg-clip-text text-transparent">
                 Save Bigger
               </span>
             </h1>
@@ -28,7 +28,7 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <Button variant="hero" size="xl" className="group">
+              <Button variant="hero" size="xl" className="group bg-orange-400">
                 Shop Now
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
