@@ -1,6 +1,7 @@
 import { Search, ShoppingCart, User, Menu, ChevronDown } from "lucide-react";
 import { Button } from "../components/ui/button.jsx";
 import { Input } from "../components/ui/input.jsx";
+import { Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -42,9 +43,11 @@ const Navigation = () => {
         <div className="flex items-center gap-6">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-sky-500 bg-clip-text text-transparent">
+            <Link to={"/"}>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-sky-500 bg-clip-text text-transparent hover:cursor-pointer">
               ShopHub
             </h1>
+            </Link>
           </div>
 
           {/* Search bar */}
@@ -91,9 +94,11 @@ const Navigation = () => {
           </DropdownMenu>
 
           {categories.slice(0, 5).map((category) => (
+            <Link to={`/${category.toLocaleLowerCase()}`} key={category}>
             <Button key={category} variant="ghost" size="sm" className="shrink-0">
               {category}
             </Button>
+            </Link>
           ))}
         </div>
       </div>
