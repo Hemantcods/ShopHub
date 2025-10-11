@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import userRoute from "./routes/user.routes.js";
 const app = express();
 
 // cors
@@ -10,11 +11,7 @@ app.use(cors({
 
 
 // routes
-app.get("/api",(req,res)=>{
-    console.log("API is running...");
-    res.send("API is running...");
-})
-
+app.get("/api/user",userRoute)
 
 
 export {app};
