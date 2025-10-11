@@ -1,6 +1,11 @@
 import mongoose,{Schema} from "mongoose";
 
 const orderSchema=new Schema({
+    id:{
+        type:Schema.Types.ObjectId,
+        ref:"Product",
+        required:true
+    },
     customer_id:{
         type:Schema.Types.ObjectId,
         ref:"User"
