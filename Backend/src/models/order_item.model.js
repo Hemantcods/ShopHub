@@ -20,5 +20,13 @@ const orderItemSchema=new Schema({
     price:{
         type:Number,
         required:true
-    }
+    },
+    discount:{
+        type:Number,
+        default:0
+    },
+    
 })
+
+
+export const OrderItem=mongoose.model("OrderItem",orderItemSchema);

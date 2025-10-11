@@ -22,6 +22,21 @@ const productSchema=new Schema({
     },
     imageUrl:{
         type:String
+    },
+    discount:{
+        type:Number,
+        default:0
+    },
+    rating:{
+        type:Number,
+        default:0
+    },
+    reviews:{
+        type:Number,
+        default:0
+    },
+    badge:{
+        type:String
     }
 
 
