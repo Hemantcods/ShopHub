@@ -1,4 +1,3 @@
-import { connect } from "mongoose";
 import {app} from "./app.js";
 import connectDB from "./db/index.js";
 
