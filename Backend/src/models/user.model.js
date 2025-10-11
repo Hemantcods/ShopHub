@@ -18,11 +18,38 @@ const userSchema=new Schema({
         lowercase:true,
         trim:true
     },
-    fullname:{
+    firstname:{
         type:String,
         required:true,
         trim:true,
         index:true
+    },
+    lastname:{
+        type:String,
+        required:true,
+        trim:true,
+        index:true
+    },
+    phone:{
+        type:String,
+        required:true,
+        trim:true,
+        index:true
+    },
+    address:{
+        type:String,
+    },
+    city:{
+        type:String,
+    },
+    state:{
+        type:String,
+    },
+    country:{
+        type:String,
+    },
+    zip:{
+        type:String,
     },
     password:{
         type:String,
