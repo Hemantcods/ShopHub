@@ -52,7 +52,7 @@ const createProduct=async(req,res)=>{
 // get product
 const getProduct=async(req,res)=>{
     const {id}=req.params;
-    const product=await Product.findById(id);
+    const product=await Product.findById(id).select("-__v");
     if (!product){
         throw new ApiError(404,"Product not found");
     }
@@ -61,7 +61,8 @@ const getProduct=async(req,res)=>{
 
 // get all products
 const getAllProducts=async(req,res)=>{
-    const products=await Product.find();
+    // get all products from the database sorted by createdAt in descending order
+    const products=await Product.find().select("-__v").sort({createdAt:-1});
     res.status(200).json({products});
 }
 
