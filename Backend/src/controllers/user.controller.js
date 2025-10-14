@@ -2,7 +2,7 @@ import { ApiError } from "../utils/ApiError.js";
 import asyncHandler from "../utils/AsyncHandler.js";
 import { User } from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-
+import jwt from "jsonwebtoken";
 
 
 
@@ -97,8 +97,115 @@ const LoginUser=asyncHandler(async(req,res)=>{
 
 })
 
+// logout user
+const logoutUser = asyncHandler(async (req, res) => {
+    await User.findByIdAndUpdate(req.user._id, {
+        $set: {
+            refreshToken: undefined
+        }
+    }, {
+        new: true
+    }
+    )
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+    return res
+        .status(200)
+        .clearCookie("accessToken", options)
+        .clearCookie("refreshToken", options)
+        .json(
+            new ApiResponse(200, {}, "user logged out")
+        )
+})
+
+// refresh access token
+const refreshAccessToken = asyncHandler(async (req, res) => {
+    console.log(req.cookies)
+    const inc_refresh_token = await req.cookies.refreshToken || req.body.refreshToken
+    if (!inc_refresh_token) {
+        throw new ApiError(401, "unauthorised request")
+    }
+    const decodedToken = jwt.verify(
+        inc_refresh_token,
+        process.env.REFRESH_TOKEN_SECRET
+    )
+    const user = await User.findById(decodedToken?._id)
+    if (!user) {
+        throw new ApiError(402, "unauthorised user request")
+    }
+    if (inc_refresh_token !== user?.refreshToken) {
+        throw new ApiError(401, "refresh token expired")
+    }
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+    const { access_token, refresh_token } = await generateAccessAndRefreshToken(user._id)
+    return res
+        .status(200)
+        .cookie("access_token", access_token, options)
+        .cookie("refresh_token", refresh_token, options)
+        .json(
+            new ApiResponse(200, { access_token, refresh_token }, "sucess")
+        )
+})
+
+// change password
+const changePassword = asyncHandler(async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const user = await User.findById(req.user._id)
+    if (!(user.isPasswordCorrect(currentPassword))) {
+        throw new ApiError(401, "password missmatch")
+    }
+    user.password = newPassword
+    await user.save({ ValidateBeforeSave: false })
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, {}, "password updated sucessfully"))
+});
+
+// get current user
+const getCurrentUser = asyncHandler(async (req, res) => {
+    return res
+        .status(200)
+        .json(new ApiResponse(200, req.user, "user fetched sucessfully"))
+})
+
+// update user details
+const updateUserDetails = asyncHandler(async (req, res) => {
+    const { firstName,lastName,phone,address,city,state,country,zip, email } = req.body
+    if (!(fullName || email)) {
+        throw new ApiError(401, "fullname or password reuuired")
+    }
+    const newuser = User.findByIdAndUpdate(req.user._id, {
+        $set: {
+            firstName,
+            lastName,
+            email,
+            phone,
+            address,
+            city,
+            state,
+            country,
+            zip
+        }
+    }, { new: true })
+        .select("-passwoed")
+    return res
+        .status(200)
+        .json(new ApiResponse(200, newuser, "updated sucessfully"))
+})
 
 // all user controllers
 export {
-    registerUser
+    registerUser,
+    LoginUser,
+    logoutUser,
+    refreshAccessToken,
+    changePassword,
+    getCurrentUser,
+    updateUserDetails
 }
