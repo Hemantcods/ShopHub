@@ -1,24 +1,33 @@
 import { Toaster } from "./components/ui/sonner.jsx";
 import { TooltipProvider } from "./components/ui/tooltip.jsx";
-// import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Index from "./pages/Index.jsx";
+import NotFound from "./pages/NotFound.jsx";
 import Electronics from "./pages/Electronics.jsx";
+import Login from "./pages/LoginPage.jsx";
 
+function AppRoutes() {
+  return (
+    <>
+      {/* Render normal routes */}
+      <Routes >
+        <Route path="/" element={<Index />} />
+        <Route path="/electronics" element={<Electronics />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      
+    </>
+  );
+}
 
 const App = () => (
-    <TooltipProvider>
-      <Toaster />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/electronics" element={<Electronics />}/>
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+  <TooltipProvider>
+    <Toaster />
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  </TooltipProvider>
 );
 
 export default App;

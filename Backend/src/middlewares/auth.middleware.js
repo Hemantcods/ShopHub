@@ -3,7 +3,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import jwt from 'jsonwebtoken'
 import { User } from "../models/user.model.js";
 
-
+// this middleware will verify the JWT token and attach the user to the request object
 export const verifyJWT = asyncHandler(async (req,_res,next) => {
     try {
         const token = await req.cookies?.accessToken || req.header("Authorization").replace("Bearer ", "")

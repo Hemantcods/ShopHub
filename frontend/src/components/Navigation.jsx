@@ -74,6 +74,15 @@ const Navigation = () => {
               </span>
             </Button>
           </div>
+          {/* login button */}
+          <Link to="/login" >
+          <div className=" left-0 rounded-full">
+            <Button variant="hero" size="" className="relative bg-orange-500 rounded-full" >
+              Login
+            </Button>
+          </div>
+          </Link>
+
         </div>
 
         {/* Categories */}
