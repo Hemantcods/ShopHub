@@ -3,6 +3,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build": "npm install",
+    "start": "node -r dotenv/config src/index.js",
     "dev": "nodemon -r dotenv/config src/index.js"
   },
   "dependencies": {
