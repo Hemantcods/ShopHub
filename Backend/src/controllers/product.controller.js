@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Product } from "../models/product.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import {uploadOnCloudinary} from "../utils/cloudinary.js";
@@ -52,11 +53,19 @@ const createProduct=async(req,res)=>{
 // get product
 const getProduct=async(req,res)=>{
     const {id}=req.params;
-    const product=await Product.findById(id).select("-__v");
-    if (!product){
-        throw new ApiError(404,"Product not found");
+    if(!id || id.trim()==""|| !mongoose.Types.ObjectId.isValid(id)){
+        throw new ApiError(400,"Invalid product id");
     }
-    res.status(200).json({product});
+    try {
+        const product=await Product.findById(id).select("-__v");
+        
+        if (!product){
+            throw new ApiError(404,"Product not found");
+        }
+        res.status(200).json({product});
+    } catch (error) {
+        throw new ApiError(500,"Something went wrong");
+    }
 }
 
 // get all products
