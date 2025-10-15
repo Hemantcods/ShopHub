@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { Product } from "../models/product.model.js";
-import { ApiError } from "../utils/ApiError.js";
+import { ApiError } from "../utils/ApiError.js"
+import { ApiResponse } from "../utils/ApiResponse.js";
 import {uploadOnCloudinary} from "../utils/cloudinary.js";
 
 
@@ -75,10 +76,30 @@ const getAllProducts=async(req,res)=>{
     res.status(200).json({products});
 }
 
-
-
+// getting product by category
+const getProductByCategory=async(req,res)=>{
+    const {category}=req.params;
+    if (!category || category.trim()==""){
+        throw new ApiError(400,"Invalid category");
+    }
+    try {
+        const products=await Product.find({category}).select("-__v").sort({createdAt:-1});
+        if (products.length===0){
+            return res.status(404).json({message:"No products found in this category"});
+        }
+        res
+        .status(200)
+        .json(
+            new ApiResponse(200,products,"products fetched sucessfully")
+        )
+    }catch (error){
+    
+        throw new ApiError(500,"Something went wrong");
+    }
+    }
 export {
     createProduct,
     getProduct,
-    getAllProducts
+    getAllProducts,
+    getProductByCategory    
 };
