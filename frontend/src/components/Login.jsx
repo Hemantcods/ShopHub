@@ -11,17 +11,26 @@ function Login() {
     const Login = async (data) => {
         setError('')
         try {
-            const res = await fetch('http://localhost:5000/api/auth/login', {
+            const res = await fetch('http://localhost:8000/api/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             })
-            const resData = await res.json()
+            const result =  res
+            // console.log(res);
+            
+            if (!res.ok) {
+                throw new Error("email or password is incorrect")
+            }
+            console.log("Login successful", result);
+            // redirect to home page
+            window.location.href = '/'
         } catch (error) {
             setError(error.message)
         }
+        
     }
     return (
 

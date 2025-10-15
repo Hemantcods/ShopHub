@@ -1,5 +1,5 @@
 import { ApiError } from "../utils/ApiError.js";
-import asyncHandler from "../utils/AsyncHandler.js";
+import asyncHandler from "../utils/asyncHandler.js";
 import { User } from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
@@ -72,8 +72,7 @@ const LoginUser=asyncHandler(async(req,res)=>{
         throw new ApiError(400,"All fields are required")
     }
     // check if user exists
-    const user=await User.findOne(({email}))
-    .select("-password");
+    const user=await User.findOne(({email}));
     if(!user){
         throw new ApiError(400,"User not found")
     }
@@ -88,11 +87,14 @@ const LoginUser=asyncHandler(async(req,res)=>{
         httpOnly: true,
         secure: true
     }
+
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+
     return res.status(200)
     .cookie("refreshToken",refresh_token,options)
     .cookie("accessToken",access_token,options)
     .json(
-        new ApiResponse(200,{user,access_token,refresh_token},"User logged in successfully")
+        new ApiResponse(200,{user: loggedInUser,access_token,refresh_token},"User logged in successfully")
     );
 
 })
@@ -156,7 +158,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const changePassword = asyncHandler(async (req, res) => {
     const { currentPassword, newPassword } = req.body;
     const user = await User.findById(req.user._id)
-    if (!(user.isPasswordCorrect(currentPassword))) {
+    if (!(await user.isPasswordCorrect(currentPassword))) {
         throw new ApiError(401, "password missmatch")
     }
     user.password = newPassword
