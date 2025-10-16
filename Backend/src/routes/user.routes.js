@@ -32,5 +32,4 @@ router.route("/refresh-access-token").post(
     verifyJWT,
     refreshAccessToken
 )
-
 export default router;
