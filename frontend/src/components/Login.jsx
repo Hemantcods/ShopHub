@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 
+
+
+
 function Login() {
     const [error, setError] = useState('')
     const { register, handleSubmit } = useForm();
@@ -11,7 +14,8 @@ function Login() {
     const Login = async (data) => {
         setError('')
         try {
-            const res = await fetch('http://localhost:8000/api/users/login', {
+            console.log(import.meta.env.BACKEND);
+            const res = await fetch('https://shophub-9rig.onrender.com/api/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
