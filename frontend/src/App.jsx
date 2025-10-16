@@ -5,6 +5,7 @@ import Index from "./pages/Index.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Electronics from "./pages/Electronics.jsx";
 import Login from "./pages/LoginPage.jsx";
+import Admin from "./pages/Admin.jsx";
 
 function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ function AppRoutes() {
         <Route path="/" element={<Index />} />
         <Route path="/electronics" element={<Electronics />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       
