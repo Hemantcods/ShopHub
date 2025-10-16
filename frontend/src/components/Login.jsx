@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND;
+
 function Login() {
   const [error, setError] = useState('');
   const { register, handleSubmit } = useForm();
@@ -20,7 +22,12 @@ function Login() {
   const handleLogin = async (data) => {
     setError('');
     try {
-      const res = await fetch('https://shophub-9rig.onrender.com/api/users/login', {
+      // console.log(BACKEND_URL);
+      
+      const loginUrl = `${BACKEND_URL}/api/auth/login`;
+      console.log(loginUrl);
+      
+      const res = await fetch(loginUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
