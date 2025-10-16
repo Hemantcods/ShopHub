@@ -15,12 +15,14 @@ function Login() {
   useEffect(() => {
     const checkUserStatus = async () => {
       try {
+        console.log("Checking user status");
         const res = await fetch(`${BACKEND_URL}/api/users/current-user`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
         });
-
+        console.log(res);
+        
         if (res.ok) {
           navigate("/admin");
         }
@@ -31,7 +33,7 @@ function Login() {
     };
 
     checkUserStatus();
-  }, [navigate]);
+  },);
 
 const handleLogin = async (data) => {
   setError('');
