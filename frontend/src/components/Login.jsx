@@ -19,9 +19,9 @@ function Login() {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
-        }) || undefined;
+        });
 
-        if (res) {
+        if (res.ok) {
           navigate("/admin");
         }
       } catch (error) {
