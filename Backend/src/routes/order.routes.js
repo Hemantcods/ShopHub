@@ -9,7 +9,7 @@ router.route("/order").post(
     verifyJWT,
     orderItem
 )
-router.route("/orders").post(
+router.route("/").get(
     verifyJWT,
     getOrders
 )
