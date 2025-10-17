@@ -1,7 +1,7 @@
 import mongoose,{Schema} from "mongoose";
 
 const orderSchema=new Schema({
-    id:{
+    product_id:{
         type:Schema.Types.ObjectId,
         ref:"Product",
         required:true
@@ -9,6 +9,14 @@ const orderSchema=new Schema({
     customer_id:{
         type:Schema.Types.ObjectId,
         ref:"User"
+    },
+    price:{
+        type:Number,
+        required:true
+    },
+    quantity:{
+        type:Number,
+        required:true
     },
     order_date:{
         type:Date,
