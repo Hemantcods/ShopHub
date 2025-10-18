@@ -2,13 +2,13 @@ import { Star, ShoppingCart } from "lucide-react";
 import { Button } from "../components/ui/button.jsx";
 import { Badge } from "../components/ui/badge.jsx";
 
-const ProductCard = ({ name, price, originalPrice, rating, reviews, image, badge, discount }) => {
+const ProductCard = ({ name, price, originalPrice, rating, reviews, imageUrl, badge, discount }) => {
   return (
-    <div className="group bg-card rounded-xl border border-border overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-      {/* Image */}
+    <div className="group bg-card rounded-xl border border-border overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ">
+      {/* imageUrl */}
       <div className="relative aspect-square overflow-hidden bg-muted/30">
         <img
-          src={image}
+          src={imageUrl}
           alt={name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
