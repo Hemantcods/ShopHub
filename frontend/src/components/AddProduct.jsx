@@ -38,40 +38,40 @@ const AddProduct = () => {
                     <form action="" className='grid grid-cols-2 gap-5 pt-10 pl-20 w-2xl'>
                         <div className='flex flex-col w-1/2'>
                             <label>Product Name</label>
-                            <input type="text" className='bg-amber-400 rounded-xl w-50' {...register("name",{required:true})} />
+                            <input type="text" className='bg-amber-400 rounded-xl w-50 pl-4 ' {...register("name",{required:true})} />
                         </div>
                         <div className='flex flex-col w-1/2 '>
                             <label>Price</label>
-                            <input type="text" className='bg-amber-400 rounded-xl w-50' {...register("price",{required:true,type:"number"})} />
+                            <input type="text" className='bg-amber-400 rounded-xl w-50 pl-4' {...register("price",{required:true,type:"number"})} />
                         </div>
                         <div className='flex flex-col w-1/2'>
                             <label>Quantity</label>
-                            <input type="text" className='bg-amber-400 rounded-xl w-50' {...register("quantity",{required:true,type:"number"})} />
+                            <input type="text" className='bg-amber-400 rounded-xl w-50 pl-4' {...register("quantity",{required:true,type:"number"})} />
                         </div>
                         <div className='flex flex-col w-1/2'>
                             <label>Category</label>
-                            <input type="text" className='bg-amber-400 rounded-xl w-50' {...register("category",{required:true})} />
+                            <input type="text" className='bg-amber-400 rounded-xl w-50 pl-4' {...register("category",{required:true})} />
                         </div>
 
                         <div className='flex flex-col w-1/2'>
                             <label>Discount</label>
-                            <input type="text" className='bg-amber-400 rounded-xl w-50' {...register("discount",{required:true,type:"number"})} />
+                            <input type="text" className='bg-amber-400 rounded-xl w-50 pl-4' {...register("discount",{required:true,type:"number"})} />
                         </div>
                         <div className='flex flex-col w-1/2'>
                             <label>Rating</label>
-                            <input type="text" className='bg-amber-400 rounded-xl w-50' {...register("rating",{required:true,type:"number"})} />
+                            <input type="text" className='bg-amber-400 rounded-xl w-50 pl-4' {...register("rating",{required:true,type:"number"})} />
                         </div>
                         <div className='flex flex-col w-1/2'>
                             <label>Review</label>
-                            <input type="text" className='bg-amber-400 rounded-xl w-50' {...register("review",{required:true,type:"number"})} />
+                            <input type="text" className='bg-amber-400 rounded-xl w-50 pl-4' {...register("review",{required:true,type:"number"})} />
                         </div>
                         <div className='flex flex-col w-1/2'>
                             <label>Badge</label>
-                            <input type="text" className='bg-amber-400 rounded-xl w-50' {...register("badge",{required:true})} />
+                            <input type="text" className='bg-amber-400 rounded-xl w-50 pl-4' {...register("badge",{required:true})} />
                         </div>
                         <div className='flex flex-col w-1/2'>
                             <label>Description</label>
-                            <textarea type="text" className='bg-amber-400 w-112 h-50 rounded-xl' {...register("description",{required:true})} />
+                            <textarea type="text" className='bg-amber-400 w-112 h-50 rounded-xl pl-4' {...register("description",{required:true})} />
                         </div>
                     </form>
                     <div className='flex flex-col w-1/4 pt-15'>
