@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import { ShoppingCart, Users, DollarSign, Package } from "lucide-react";
 import Dashboard from "../components/Dashboard.jsx";
 import ListProducts from "../components/ListProducts.jsx";
+import { Button } from "../components/ui/button.jsx";
 const Admin = () => {
   const [activeSection, setActiveSection] = React.useState("dashboard");
   const [products, setProducts] = React.useState([]);
   // handle click on sidebar links
   // get all products from backend
   const getAllProducts = async () => {
-    const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/products`,{
+    const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/products`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -19,16 +20,16 @@ const Admin = () => {
     }
     const data = await response.json();
     console.log(data["products"]);
-    
+
     return data["products"];
   }
-  useEffect(()=>{
+  useEffect(() => {
     const fetchProducts = async () => {
       const productsData = await getAllProducts();
       setProducts(productsData);
     };
     fetchProducts();
-  },[]);
+  }, []);
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -39,7 +40,7 @@ const Admin = () => {
           <a href="#" className="block font-medium text-gray-700 hover:text-indigo-600">
             Dashboard
           </a>
-          <a href="#" className="block font-medium text-gray-700 hover:text-indigo-600" onClick={()=>setActiveSection("products")}>
+          <a href="#" className="block font-medium text-gray-700 hover:text-indigo-600" onClick={() => setActiveSection("products")}>
             Products
           </a>
           <a href="#" className="block font-medium text-gray-700 hover:text-indigo-600">
@@ -54,8 +55,17 @@ const Admin = () => {
         </nav>
       </aside>
       {activeSection === "dashboard" && <Dashboard />}
-      {activeSection === "products" && <ListProducts products={products}/>}
-      
+      {activeSection === "products" &&
+        <>
+          <div className="block">
+            <div className="text-3xl font-bold text-gray-800 mb-10 pt-3 ml-4">Products
+              <Button className="float-right bg-red-500 mr-4" variant="accent" size="lg" >Add Product</Button>
+            </div>
+            <ListProducts products={products}  />
+          </div>
+        </>
+      }
+
     </div>
   );
 };
