@@ -6,7 +6,7 @@ import NotFound from "./pages/NotFound.jsx";
 import Electronics from "./pages/Electronics.jsx";
 import Login from "./pages/LoginPage.jsx";
 import Admin from "./pages/Admin.jsx";
-import Category from "./pages/category.jsx";
+import Category from "./pages/Category.jsx";
 
 function AppRoutes() {
   return (
