@@ -7,6 +7,7 @@ import Electronics from "./pages/Electronics.jsx";
 import Login from "./pages/LoginPage.jsx";
 import Admin from "./pages/Admin.jsx";
 import Category from "./pages/Category.jsx";
+import AddProduct from "./components/AddProduct.jsx";
 
 function AppRoutes() {
   return (
@@ -19,6 +20,8 @@ function AppRoutes() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/products/:category" element={<Category />} />
         <Route path="*" element={<NotFound />} />
+        {/* test routes */}
+        <Route path="/test" element={<Admin/>}/>
       </Routes>
       
     </>

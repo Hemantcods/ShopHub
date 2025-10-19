@@ -7,7 +7,7 @@ function ListProducts({ products }) {
     <div className='flex grid-cols-4 grid-auto-flow-row gap-4 '>
         {console.log(products)}
         {products.map((product) => (
-            <ProductCard key={product.name} {...product} />
+            <ProductCard key={product.name} {...product} className="h-30" />
         ))}
     </div>
   )
