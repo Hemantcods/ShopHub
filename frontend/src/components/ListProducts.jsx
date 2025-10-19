@@ -4,7 +4,7 @@ import ProductCard from './ProductCard'
 function ListProducts({ products }) {
     // product with prooduct array with product id
   return (
-    <div className='flex grid-cols-4 grid-auto-flow-row gap-4 '>
+    <div className=' grid grid-cols-4 grid-rows-4  gap-4 '>
         {console.log(products)}
         {products.map((product) => (
             <ProductCard key={product.name} {...product} className="h-30" />
