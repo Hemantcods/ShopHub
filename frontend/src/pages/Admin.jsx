@@ -4,6 +4,7 @@ import Dashboard from "../components/Dashboard.jsx";
 import ListProducts from "../components/ListProducts.jsx";
 import { Button } from "../components/ui/button.jsx";
 import AddProduct from "../components/AddProduct.jsx";
+import Skeleton from "react-loading-skeleton";
 const Admin = () => {
   const [activeSection, setActiveSection] = React.useState("dashboard");
   const [products, setProducts] = React.useState([]);
@@ -62,7 +63,7 @@ const Admin = () => {
             <div className="text-3xl font-bold text-gray-800 mb-10 pt-3 ml-4">Products
               <Button className="float-right bg-red-500 mr-4" variant="accent" size="lg" onClick={() => setActiveSection("add-product")}>Add Product</Button>
             </div>
-            <ListProducts products={products}  />
+            <ListProducts products={products}  isAdmin={true}  /> || <Skeleton />
           </div>
         </>
       }

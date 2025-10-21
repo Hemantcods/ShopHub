@@ -2,7 +2,7 @@ import { Star, ShoppingCart } from "lucide-react";
 import { Button } from "../components/ui/button.jsx";
 import { Badge } from "../components/ui/badge.jsx";
 
-const ProductCard = ({ name, price, originalPrice, rating, reviews, imageUrl, badge, discount }) => {
+const ProductCard = ({ name, price, originalPrice, rating, reviews, imageUrl, badge, discount ,isAdmin=false }) => {
   return (
     <div className="group bg-card rounded-xl border border-border overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ">
       {/* imageUrl */}
@@ -51,8 +51,8 @@ const ProductCard = ({ name, price, originalPrice, rating, reviews, imageUrl, ba
 
         {/* Actions */}
         <Button variant="default" size="sm" className="w-full gap-2">
-          <ShoppingCart className="h-4 w-4" />
-          Add to Cart
+
+          {isAdmin? <>Edit Product</> : (<><ShoppingCart className="h-4 w-4" />Add to Cart </>)}
         </Button>
       </div>
     </div>
