@@ -103,7 +103,7 @@ const Navigation = () => {
           </DropdownMenu>
 
           {categories.slice(0, 5).map((category) => (
-            <Link to={`/${category.toLocaleLowerCase()}`} key={category}>
+            <Link to={`products/${category.toLocaleLowerCase()}`} key={category}>
             <Button key={category} variant="ghost" size="sm" className="shrink-0">
               {category}
             </Button>
